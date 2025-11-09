@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nachonet.Common.Qbittorrent", "Nachonet.Common.Qbittorrent\Nachonet.Common.Qbittorrent.csproj", "{31704A8E-73ED-4BC9-861E-1CB7BBA9D756}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nachonet.Common.Qbittorrent.Test", "Nachonet.Common.Qbittorrent.Test\Nachonet.Common.Qbittorrent.Test.csproj", "{2A61AEE6-AD5B-41F6-A19C-3ED7274D8B89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nachonet.Common.Qbittorrent.Cli", "Nachonet.Common.Qbittorrent.Cli\Nachonet.Common.Qbittorrent.Cli.csproj", "{07957D4A-AA3E-48AF-B4FA-662A7A8774B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31704A8E-73ED-4BC9-861E-1CB7BBA9D756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31704A8E-73ED-4BC9-861E-1CB7BBA9D756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31704A8E-73ED-4BC9-861E-1CB7BBA9D756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31704A8E-73ED-4BC9-861E-1CB7BBA9D756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A61AEE6-AD5B-41F6-A19C-3ED7274D8B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A61AEE6-AD5B-41F6-A19C-3ED7274D8B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A61AEE6-AD5B-41F6-A19C-3ED7274D8B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A61AEE6-AD5B-41F6-A19C-3ED7274D8B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07957D4A-AA3E-48AF-B4FA-662A7A8774B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07957D4A-AA3E-48AF-B4FA-662A7A8774B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07957D4A-AA3E-48AF-B4FA-662A7A8774B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07957D4A-AA3E-48AF-B4FA-662A7A8774B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B02813D-2B39-4441-BF6E-DD3CA5F2D3FE}
+	EndGlobalSection
+EndGlobal

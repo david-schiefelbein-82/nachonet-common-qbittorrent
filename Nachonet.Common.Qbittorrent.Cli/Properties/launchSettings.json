@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Nachonet.Common.Qbittorrent.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "-baseUrl \"http://nachomedia:8080\" -user dave -pass \"%QBittorrent-Password%\""
+    }
+  }
+}

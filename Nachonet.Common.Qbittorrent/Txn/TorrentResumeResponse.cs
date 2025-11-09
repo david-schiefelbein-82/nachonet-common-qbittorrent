@@ -1,0 +1,25 @@
+﻿namespace Nachonet.Common.Qbittorrent.Txn
+{
+
+    public class TorrentResumeResponse : IResponse
+    {
+
+        public override string ToString()
+        {
+            return Response.Print(this, true);
+        }
+
+        public static async Task<TorrentResumeResponse> ParseAsync(HttpResponseMessage httpResp, CancellationToken cancellationToken = default)
+        {
+            var msg = await httpResp.Content.ReadAsStringAsync(cancellationToken);
+            httpResp.AssertSuccessStatusCode(msg);
+
+            //if (!msg.StartsWith("OK", StringComparison.CurrentCultureIgnoreCase))
+            //{
+            //    throw new QbittorrentException(msg);
+            //}
+
+            return new TorrentResumeResponse();
+        }
+    }
+}
