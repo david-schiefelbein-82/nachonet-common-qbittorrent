@@ -8,7 +8,7 @@ namespace Nachonet.Common.Qbittorrent.Txn
     {
         private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
 
-        public override async Task<SearchResultsResponse> ExecuteAsync(SearchStartRequest request, CancellationToken cancellationToken = default)
+        public override async Task<SearchResultsResponse> ExecuteAsync(SearchStartRequest request, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
         {
             using var client = _httpClientFactory.CreateClient("internal-search");
 
@@ -18,10 +18,11 @@ namespace Nachonet.Common.Qbittorrent.Txn
                 new KeyValuePair<string, string>("cat", request.Category ?? "0"),
             ];
 
-            string query = await new FormUrlEncodedContent(param).ReadAsStringAsync(cancellationToken);
-            var httpReq = request.ToRequest("https://apibay.org/q.php?" + query);
+            if (timeout.HasValue)
+                client.Timeout = timeout.Value;
 
-            var httpResp = await client.SendAsync(httpReq, cancellationToken);
+            string query = await new FormUrlEncodedContent(param).ReadAsStringAsync(cancellationToken);
+            var httpResp = await client.GetAsync("https://apibay.org/q.php?" + query);
 
             var msg = await httpResp.Content.ReadAsStringAsync(cancellationToken);
             httpResp.AssertSuccessStatusCode(msg);
@@ -39,7 +40,7 @@ namespace Nachonet.Common.Qbittorrent.Txn
                          Leechers = int.Parse(x.Leechers),
                          Seeders = int.Parse(x.Seeders),
                      };
-            return new SearchResultsResponse() { Results = results.ToArray() };
+            return new SearchResultsResponse() { Results = [.. results] };
         }
 
         private static string Quote(string name)
@@ -85,6 +86,11 @@ namespace Nachonet.Common.Qbittorrent.Txn
 
             [JsonPropertyName("imdb")]
             public string Imdb { get; set; }
+
+            public override string ToString()
+            {
+                return $"{{ id: {Id}, name: {Name} }}"; 
+            }
 
             public ThePirateBayResult()
             {

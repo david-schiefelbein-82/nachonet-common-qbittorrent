@@ -30,13 +30,15 @@ namespace Nachonet.Common.Qbittorrent.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(QbittorrentAuthException), "Fails.")]
         public async Task TestBadLogin()
         {
             var authFactory = new MockHttpClientFactory(HttpStatusCode.OK, new StringContent("Fails."));
             var cancellationToken = default(CancellationToken);
             var login = new AuthLogin(authFactory, BaseUrl);
-            await login.ExecuteAsync(new AuthLoginRequest("inccorrectUser", "inccorectPassword"), cancellationToken);
+            Assert.ThrowsExactly<QbittorrentAuthException>(async () =>
+            {
+                await login.ExecuteAsync(new AuthLoginRequest("inccorrectUser", "inccorectPassword"), cancellationToken);
+            });
         }
     }
 }

@@ -18,11 +18,11 @@
         public HttpRequestMessage ToRequest(string baseUri)
         {
             var httpReq = new HttpRequestMessage(HttpMethod.Post, baseUri + "/api/v2/" + Name);
-            IList<KeyValuePair<string, string>> param = new List<KeyValuePair<string, string>>
+            var param = new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("pattern", Pattern),
-                new KeyValuePair<string, string>("plugins", Plugins ?? "all"),
-                new KeyValuePair<string, string>("category", Category ?? "all")
+                new("pattern", Pattern),
+                new("plugins", Plugins ?? "all"),
+                new("category", Category ?? "all")
             };
 
             httpReq.Content = new FormUrlEncodedContent(param);

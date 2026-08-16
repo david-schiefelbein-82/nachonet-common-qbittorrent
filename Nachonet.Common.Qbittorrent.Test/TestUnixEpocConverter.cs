@@ -24,15 +24,18 @@ namespace Nachonet.Common.Qbittorrent.Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void ReadNull()
         {
             var options = new JsonSerializerOptions();
             var converter = new UnixEpocConverter();
             var bytes = System.Text.Encoding.UTF8.GetBytes("null");
-            var reader = new Utf8JsonReader(bytes);
-            reader.Read();
-            converter.Read(ref reader, typeof(DateTime), options);
+
+            Assert.ThrowsExactly<InvalidOperationException>(() =>
+            {
+                var reader = new Utf8JsonReader(bytes);
+                reader.Read();
+                converter.Read(ref reader, typeof(DateTime), options);
+            });
         }
 
         [TestMethod]

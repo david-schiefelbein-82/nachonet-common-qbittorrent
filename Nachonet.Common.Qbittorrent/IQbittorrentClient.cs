@@ -12,7 +12,7 @@ namespace Nachonet.Common.Qbittorrent
 
         Task<AppVersionResponse> AppVersion(AppVersionRequest appVersionRequest, CancellationToken cancellationToken = default);
 
-        Task<SearchResultsResponse> InternalSearchAsync(SearchStartRequest request, CancellationToken cancellationToken = default);
+        Task<SearchResultsResponse> InternalSearchAsync(SearchStartRequest request, TimeSpan? timeout = null, CancellationToken cancellationToken = default);
 
         Task<SearchStartResponse> SearchStartAsync(SearchStartRequest request, CancellationToken cancellationToken = default);
 

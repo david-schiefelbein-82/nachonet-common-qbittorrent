@@ -63,6 +63,7 @@ namespace Nachonet.Common.Qbittorrent.Cli
                     else if (cmd == Command.InternalSearch)
                     {
                         var pattern = PromptIfMissing("Search Pattern", args, 1);
+                        var timeout = PromptIfMissing("Timeout (sec)", args, 2);
 
                         if (args.Length == 0)
                         {
@@ -70,7 +71,10 @@ namespace Nachonet.Common.Qbittorrent.Cli
                             continue;
                         }
 
-                        var response = await client.InternalSearchAsync(new SearchStartRequest(pattern), cancellationToken);
+                        int timeoutSec;
+                        try { timeoutSec = int.Parse(timeout); } catch { timeoutSec = 60; }
+
+                        var response = await client.InternalSearchAsync(new SearchStartRequest(pattern), TimeSpan.FromSeconds(timeoutSec), cancellationToken);
                         var topResult = response.Results.FirstOrDefault();
                         topUrl = topResult?.FileUrl;
                         Console.WriteLine(cmd + " : " + response.ToString());

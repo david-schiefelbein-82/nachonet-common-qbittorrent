@@ -50,10 +50,10 @@ namespace Nachonet.Common.Qbittorrent
             return await method.ExecuteAsync(request, cancellationToken);
         }
 
-        public async Task<SearchResultsResponse> InternalSearchAsync(SearchStartRequest request, CancellationToken cancellationToken = default)
+        public async Task<SearchResultsResponse> InternalSearchAsync(SearchStartRequest request, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
         {
             var method = new InternalSearch(_httpClientFactory, _authProvider, _config.BaseUrl);
-            return await method.ExecuteAsync(request, cancellationToken);
+            return await method.ExecuteAsync(request, timeout, cancellationToken);
         }
 
         public async Task<SearchStartResponse> SearchStartAsync(SearchStartRequest request, CancellationToken cancellationToken = default)

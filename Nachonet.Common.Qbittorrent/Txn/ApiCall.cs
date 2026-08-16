@@ -9,6 +9,7 @@ namespace Nachonet.Common.Qbittorrent.Txn
     {
 
         public Task<TResp> ExecuteAsync(TReq request, CancellationToken cancellationToken = default);
+        public Task<TResp> ExecuteAsync(TReq request, TimeSpan? timeout, CancellationToken cancellationToken = default);
     }
 
     public abstract class ApiCall<TReq, TResp>(IHttpClientFactory httpClientFactory, IAuthenticationTokenProvider? authenticationTokenProvider, string baseUri) : IApiCall<TReq, TResp>
@@ -21,10 +22,15 @@ namespace Nachonet.Common.Qbittorrent.Txn
 
         public virtual async Task<TResp> ExecuteAsync(TReq request, CancellationToken cancellationToken = default)
         {
-            return await ExecuteAsync(request, 1, cancellationToken);
+            return await ExecuteAsync(request, 1, null, cancellationToken);
         }
 
-        public virtual async Task<TResp> ExecuteAsync(TReq request, int attempt, CancellationToken cancellationToken = default)
+        public virtual async Task<TResp> ExecuteAsync(TReq request, TimeSpan? timeout, CancellationToken cancellationToken = default)
+        {
+            return await ExecuteAsync(request, 1, timeout, cancellationToken);
+        }
+
+        public virtual async Task<TResp> ExecuteAsync(TReq request, int attempt, TimeSpan? timeout = null, CancellationToken cancellationToken = default)
         {
             using var client = _httpClientFactory.CreateClient(request.Name);
             var httpReq = request.ToRequest(_baseUri);
@@ -60,7 +66,7 @@ namespace Nachonet.Common.Qbittorrent.Txn
                     }
 
                     // try a second time
-                    return await ExecuteAsync(request, attempt + 1, cancellationToken);
+                    return await ExecuteAsync(request, attempt + 1, timeout, cancellationToken);
                 }
             }
             else
